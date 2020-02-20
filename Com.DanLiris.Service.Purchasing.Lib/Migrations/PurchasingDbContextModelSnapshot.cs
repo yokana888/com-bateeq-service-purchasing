@@ -1000,6 +1000,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EPONo")
+                        .IsUnique()
+                        .HasFilter("[IsDeleted]=(0) AND [CreatedUtc]>CONVERT([datetime2],'2020-02-01 00:00:00.0000000')");
+
                     b.ToTable("ExternalPurchaseOrders");
                 });
 
@@ -3114,6 +3118,16 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 
                     b.Property<bool>("Active");
 
+                    b.Property<string>("ApprovedOpenPOMDBy")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTimeOffset>("ApprovedOpenPOMDDate");
+
+                    b.Property<string>("ApprovedOpenPOPurchasingBy")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTimeOffset>("ApprovedOpenPOPurchasingDate");
+
                     b.Property<double>("BudgetPrice");
 
                     b.Property<string>("CategoryId")
@@ -3144,7 +3158,13 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 
                     b.Property<long>("GarmentPRId");
 
+                    b.Property<bool>("IsApprovedOpenPOMD");
+
+                    b.Property<bool>("IsApprovedOpenPOPurchasing");
+
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsOpenPO");
 
                     b.Property<bool>("IsUsed");
 
@@ -3157,6 +3177,11 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
                         .HasMaxLength(255);
 
                     b.Property<DateTime>("LastModifiedUtc");
+
+                    b.Property<string>("OpenPOBy")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTimeOffset>("OpenPODate");
 
                     b.Property<string>("PO_SerialNumber")
                         .HasMaxLength(255);
@@ -4486,6 +4511,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("No")
+                        .IsUnique()
+                        .HasFilter("[IsDeleted]=(0) AND [CreatedUtc]>CONVERT([datetime2],'2020-02-01 00:00:00.0000000')");
+
                     b.ToTable("PurchaseRequests");
                 });
 
@@ -4917,6 +4946,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UPCNo")
+                        .IsUnique()
+                        .HasFilter("[IsDeleted]=(0) AND [CreatedUtc]>CONVERT([datetime2],'2020-02-01 00:00:00.0000000')");
+
                     b.ToTable("UnitPaymentCorrectionNotes");
                 });
 
@@ -5144,6 +5177,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
                         .HasMaxLength(255);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UPONo")
+                        .IsUnique()
+                        .HasFilter("[IsDeleted]=(0) AND [CreatedUtc]>CONVERT([datetime2],'2020-02-01 00:00:00.0000000')");
 
                     b.ToTable("UnitPaymentOrders");
                 });
@@ -5395,6 +5432,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
                         .HasMaxLength(1000);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("URNNo")
+                        .IsUnique()
+                        .HasFilter("[IsDeleted]=(0) AND [CreatedUtc]>CONVERT([datetime2],'2020-02-01 00:00:00.0000000')");
 
                     b.ToTable("UnitReceiptNotes");
                 });
