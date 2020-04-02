@@ -290,7 +290,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.BankExpenditureNoteFacades
                     {
                         COA = new COA()
                         {
-                            Code = COAGenerator.GetDebtCOA(model.SupplierImport, detail.DivisionName, datum.UnitCode)
+                            Code = COAGenerator.GetDebtCOA(model.SupplierImport, detail.DivisionName, datum.UnitCode, model.SupplierCode)
                         },
                         Debit = Convert.ToDecimal(datum.Total),
                         Remark = detail.UnitPaymentOrderNo + " / " + detail.InvoiceNo
@@ -298,18 +298,19 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.BankExpenditureNoteFacades
 
                     var vatCOA = "";
                     if (detail.Vat > 0)
-                    {
-                        if (model.SupplierImport)
-                        {
-                            vatCOA = "1510.00." + COAGenerator.GetDivisionAndUnitCOACode(detail.DivisionName, datum.UnitCode);
-                        }
-                        else
-                        {
-                            vatCOA = "1509.00." + COAGenerator.GetDivisionAndUnitCOACode(detail.DivisionName, datum.UnitCode);
-                        }
-                    }
+                        vatCOA = "1601.00." + COAGenerator.GetDivisionAndUnitCOACode(detail.DivisionName, datum.UnitCode);
+                    //{
+                    // if (model.SupplierImport)
+                    // {
+                    //     vatCOA = "1510.00." + COAGenerator.GetDivisionAndUnitCOACode(detail.DivisionName, datum.UnitCode);
+                    // }
+                    // else
+                    // {
+                    //     vatCOA = "1509.00." + COAGenerator.GetDivisionAndUnitCOACode(detail.DivisionName, datum.UnitCode);
+                    // }
+                    // }
 
-                    if (string.IsNullOrWhiteSpace(vatCOA))
+                    if (!String.IsNullOrWhiteSpace(vatCOA))
                     {
                         var vatItem = new JournalTransactionItem()
                         {
@@ -362,7 +363,8 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.BankExpenditureNoteFacades
         {
             foreach (var detail in model.Details)
             {
-                string journalTransactionUri = $"journal-transactions/reverse-transactions/{model.DocumentNo + " / " + detail.UnitPaymentOrderNo}";
+                //string journalTransactionUri = $"journal-transactions/reverse-transactions/{model.DocumentNo + "/" + detail.UnitPaymentOrderNo}";
+                string journalTransactionUri = $"journal-transactions/reverse-transactions/{model.DocumentNo}";
                 var httpClient = (IHttpClientService)serviceProvider.GetService(typeof(IHttpClientService));
                 var response = httpClient.PostAsync($"{APIEndpoint.Finance}{journalTransactionUri}", new StringContent(JsonConvert.SerializeObject(new object()).ToString(), Encoding.UTF8, General.JsonMediaType)).Result;
                 response.EnsureSuccessStatusCode();

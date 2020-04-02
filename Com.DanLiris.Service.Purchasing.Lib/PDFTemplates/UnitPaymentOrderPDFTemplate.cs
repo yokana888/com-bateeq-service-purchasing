@@ -22,7 +22,8 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             Font normal_font = FontFactory.GetFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.NOT_EMBEDDED, 7);
             Font bold_font = FontFactory.GetFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1250, BaseFont.NOT_EMBEDDED, 7);
 
-            Document document = new Document(PageSize.A5.Rotate(), 15, 15, 15, 15);
+            //Document document = new Document(PageSize.A5.Rotate(), 15, 15, 15, 15);
+            Document document = new Document(PageSize.A4, 15, 15, 15, 15);
             MemoryStream stream = new MemoryStream();
             PdfWriter writer = PdfWriter.GetInstance(document, stream);
             document.Open();
@@ -47,7 +48,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             tableHeader.SetWidths(new float[] { 1f, 1f, 1f });
 
             PdfPCell cellHeaderContentLeft = new PdfPCell() { Border = Rectangle.NO_BORDER };
-            cellHeaderContentLeft.AddElement(new Phrase("PT EFRATA RETAILINDO", header_font));
+            cellHeaderContentLeft.AddElement(new Phrase("PT. EFRATA RETAILINDO", header_font));
             cellHeaderContentLeft.AddElement(new Phrase("BANARAN, GROGOL, SUKOHARJO", normal_font));
             tableHeader.AddCell(cellHeaderContentLeft);
 
@@ -355,7 +356,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
             PdfPCell taxFooter = new PdfPCell(tableFooter);
             tableFooter.ExtendLastRow = false;
-            tableFooter.SpacingAfter = 30f;
+            tableFooter.SpacingAfter = 10f;
             document.Add(tableFooter);
 
             #endregion
