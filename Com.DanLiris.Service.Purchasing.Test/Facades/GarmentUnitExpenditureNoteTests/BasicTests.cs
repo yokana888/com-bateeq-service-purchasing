@@ -37,6 +37,8 @@ using System.Text;
 using Xunit;
 using System.Threading.Tasks;
 using Com.DanLiris.Service.Purchasing.Test.DataUtils.NewIntegrationDataUtils;
+using Com.DanLiris.Service.Purchasing.Lib.Facades.GarmentReports;
+using System.IO;
 
 namespace Com.DanLiris.Service.Purchasing.Test.Facades.GarmentUnitExpenditureNoteTests
 {
@@ -637,5 +639,64 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.GarmentUnitExpenditureNot
 			var Response = facade.GetROAsalById((int)data.Id);
 			Assert.NotEqual(0, Response.DetailExpenditureId);
 		}
-	}
+
+
+        #region Flow_Detail_material
+        [Fact]
+        public async Task Should_Success_GetReport_Flow_Detail()
+        {
+            var dbContext = _dbContext(GetCurrentMethod());
+            var Facade = new GarmentUnitExpenditureNoteFacade(GetServiceProvider(), _dbContext(GetCurrentMethod()));
+            var modelLocalSupplier = await dataUtil(Facade, GetCurrentMethod()).GetNewData();
+            var responseLocalSupplier = await Facade.Create(modelLocalSupplier);
+
+            var reportService = new GarmentFlowDetailMaterialReportFacade(GetServiceProvider(), _dbContext(GetCurrentMethod()));
+            var dateTo = DateTime.UtcNow.AddDays(1);
+            var dateFrom = dateTo.AddDays(-30);
+            var results = reportService.GetReport("", dateFrom, dateTo, 0, "", 1, 25);
+
+
+
+            Assert.NotNull(results.Item1);
+        }
+
+
+        [Fact]
+        public async Task Should_Success_GetXLS_Flow_Detail()
+        {
+            var dbContext = _dbContext(GetCurrentMethod());
+            var Facade = new GarmentUnitExpenditureNoteFacade(GetServiceProvider(), _dbContext(GetCurrentMethod()));
+            var modelLocalSupplier = await dataUtil(Facade, GetCurrentMethod()).GetNewData();
+            var responseLocalSupplier = await Facade.Create(modelLocalSupplier);
+
+            var reportService = new GarmentFlowDetailMaterialReportFacade(GetServiceProvider(), _dbContext(GetCurrentMethod()));
+            var dateTo = DateTime.UtcNow.AddDays(1);
+            var dateFrom = dateTo.AddDays(-30);
+            var results = reportService.GenerateExcel("", dateFrom, dateTo, 0);
+
+
+
+            Assert.NotNull(results);
+        }
+
+        #endregion
+        [Fact]
+        public async Task Should_Success_Get_Monitoring_Out()
+        {
+            var dbContext = _dbContext(GetCurrentMethod());
+            var facade = new GarmentUnitExpenditureNoteFacade(GetServiceProvider(), _dbContext(GetCurrentMethod()));
+            var data = await dataUtil(facade, GetCurrentMethod()).GetTestDataWithStorage();
+            var Response = facade.GetReportOut(null, null, "", 1, 25, "{}", 7);
+            Assert.NotNull(Response.Item1);
+        }
+        [Fact]
+        public async Task Should_Success_Get_Excel_Monitoring_Out()
+        {
+            var dbContext = _dbContext(GetCurrentMethod());
+            var facade = new GarmentUnitExpenditureNoteFacade(GetServiceProvider(), _dbContext(GetCurrentMethod()));
+            var data = await dataUtil(facade, GetCurrentMethod()).GetTestDataWithStorage();
+            var Response = facade.GenerateExcelMonOut(null, null, "", 7);
+            Assert.IsType<MemoryStream>(Response);
+        }
+    }
 }

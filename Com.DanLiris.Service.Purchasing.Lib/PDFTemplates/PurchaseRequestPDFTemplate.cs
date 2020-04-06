@@ -26,7 +26,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
             #region Header
 
-            string companyNameString = "PT EFRATA RETAILINDO";
+            string companyNameString = "PT. EFRATA RETAILINDO";
             Paragraph companyName = new Paragraph(companyNameString, header_font) { Alignment = Element.ALIGN_CENTER };
             document.Add(companyName);
 
@@ -165,26 +165,33 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
             #region TableSignature
 
-            PdfPTable tableSignature = new PdfPTable(5);
-            tableSignature.SetWidths(new float[] { 1f, 1f, 1f, 1f, 1f });
+            PdfPTable tableSignature = new PdfPTable(3);
+            tableSignature.SetWidths(new float[] { 1f, 1f, 1f });
 
-            cellCenter.Phrase = new Phrase("BAGIAN ANGGARAN", bold_font);
-            tableSignature.AddCell(cellCenter);
-            cellCenter.Phrase = new Phrase("ACC MENGETAHUI", bold_font);
-            tableSignature.AddCell(cellCenter);
-            cellCenter.Phrase = new Phrase("BAGIAN PEMBELIAN", bold_font);
+            //cellCenter.Phrase = new Phrase("BAGIAN ANGGARAN", bold_font);
+            //tableSignature.AddCell(cellCenter);
+            //cellCenter.Phrase = new Phrase("ACC MENGETAHUI", bold_font);
+            //tableSignature.AddCell(cellCenter);
+            //cellCenter.Phrase = new Phrase("BAGIAN PEMBELIAN", bold_font);
+            //tableSignature.AddCell(cellCenter);
+            //cellCenter.Phrase = new Phrase("KEPALA BAGIAN", bold_font);
+            //tableSignature.AddCell(cellCenter);
+            //cellCenter.Phrase = new Phrase("YANG MEMERLUKAN", bold_font);
+            //tableSignature.AddCell(cellCenter);
+
+            cellCenter.Phrase = new Phrase("YANG MEMERLUKAN", bold_font);
             tableSignature.AddCell(cellCenter);
             cellCenter.Phrase = new Phrase("KEPALA BAGIAN", bold_font);
             tableSignature.AddCell(cellCenter);
-            cellCenter.Phrase = new Phrase("YANG MEMERLUKAN", bold_font);
+            cellCenter.Phrase = new Phrase("BAGIAN PEMBELIAN", bold_font);
             tableSignature.AddCell(cellCenter);
 
             cellCenter.Phrase = new Phrase("\n\n\n\n");
             tableSignature.AddCell(cellCenter);
             tableSignature.AddCell(cellCenter);
             tableSignature.AddCell(cellCenter);
-            tableSignature.AddCell(cellCenter);
-            tableSignature.AddCell(cellCenter);
+            //tableSignature.AddCell(cellCenter);
+            //tableSignature.AddCell(cellCenter);
 
             PdfPCell cellSignature = new PdfPCell(tableSignature); // dont remove
             tableSignature.ExtendLastRow = false;

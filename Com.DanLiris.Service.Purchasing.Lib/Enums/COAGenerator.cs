@@ -10,8 +10,11 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Enums
         public const string HUTANG_USAHA_LOKAL = "3010";
         public const string HUTANG_USAHA_IMPOR = "3020";
 
+        public const string HUTANG_LAIN_LAIN = "2132";
+        public const string HUTANG_DAGANG = "2121";
+
         public const string HUTANG_USAHA_OPERASIONAL = "01";
-        public const string HUTANG_USAHA_INVESTASI = "02";
+        public const string HUTANG_USAHA_INVESTASI = "01";
 
         public const string DIVISI_SPINNING = "1";
         public const string UNIT_SPINNING1 = "01";
@@ -34,42 +37,64 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Enums
         public const string UNIT_CENTRAL2B = "04";
         public const string UNIT_CENTRAL2C = "05";
 
+        public const string PT_EFRATA_RETAILINDO = "5";
+        public const string UNIT_GUDANG_PEMBELIAN_UMUM = "00";
+        public const string UNIT_GUDANG_UMUM = "00";
+        public const string UNIT_GUDANG_ACCESORIES = "00";
+        public const string UNIT_GUDANG_FABRIC = "00";
+        public const string UNIT_GUDANG_CUTTING = "00";
+
         public const string PEMBELIAN_BAHAN_BAKU = "5901";
         public const string PEMBELIAN_BARANG_JADI = "5902";
         public const string PEMBELIAN_BAHAN_PEMBANTU = "5903";
         public const string PEMBELIAN_BAHAN_EMBALASE = "5904";
         public const string PEMBELIAN_BARANG_DAGANGAN = "5906";
 
-        public const string PPH23_YMH = "3330";
+       
         public const string PPH_FINAL = "3331";
-        public const string PPH21_YMH = "3340";
-        public const string PPH26_YMH = "3350";
+        public const string PPH23_MHY = "1601";
+        public const string PPH21_YMH = "1601";
+        public const string PPH22_YMH = "1601";
+        public const string PPH26_YMH = "1601";
+        public const string PPH25_YMH = "1601";
+        public const string PPH29_YMH = "1601";
 
-        public const string PERSEDIAAN_BAHAN_BAKU = "1403";
-        public const string PERSEDIAAN_BARANG_JADI = "1401";
-        public const string PERSEDIAAN_CHEMICAL = "1405";
+        public const string PERSEDIAAN_BAHAN_BAKU = "1401";
+        public const string PERSEDIAAN_BARANG_JADI = "1404";
+        public const string PERSEDIAAN_CHEMICAL = "1409";
         public const string PERSEDIAAN_BAHAN_BAKAR_INDUSTRI = "1406";
         public const string PERSEDIAAN_PELUMAS = "1407";
         public const string PERSEDIAAN_SPARE_PART = "1408";
-        public const string PERSEDIAAN_BAHAN_PEMBANTU = "1410";
+        public const string PERSEDIAAN_BAHAN_PEMBANTU = "1402";
+        public const string PERSEDIAAN_ATK_UMUM = "1405";
 
-        public const string PPN_KELUARAN = "3320";
-        public const string PPN_MASUKAN = "1509";
+        public const string PPN_KELUARAN = "2301";
+        public const string PPN_MASUKAN = "1601";
 
         private const string DEFAULT_COA_IF_EMPTY = "9999";
 
-        public static string GetDebtCOA(bool isImport, string division, string unitCode)
+        public static string GetDebtCOA(bool isImport, string division, string unitCode, string parse="")
         {
             var result = "";
-
-            if (isImport)
-                result += HUTANG_USAHA_IMPOR + "." + HUTANG_USAHA_OPERASIONAL;
+            var yield = String.IsNullOrWhiteSpace(parse) ? "VU" : parse.Substring(0, 2);
+            if  (yield == "VU")
+                result += HUTANG_LAIN_LAIN + "." + HUTANG_USAHA_OPERASIONAL;
             else
-                result += HUTANG_USAHA_LOKAL + "." + HUTANG_USAHA_OPERASIONAL;
+                result += HUTANG_DAGANG + "." + HUTANG_USAHA_OPERASIONAL;
 
             result += "." + GetDivisionAndUnitCOACode(division, unitCode);
-
             return result;
+
+            //var result = "";
+
+            //if (isImport)
+            //    result += HUTANG_USAHA_IMPOR + "." + HUTANG_USAHA_OPERASIONAL;
+            //else
+            //    result += HUTANG_USAHA_LOKAL + "." + HUTANG_USAHA_OPERASIONAL;
+
+            //result += "." + GetDivisionAndUnitCOACode(division, unitCode);
+
+            //return result;
         }
 
         public static string GetDivisionAndUnitCOACode(string division, string unitCode)
@@ -146,6 +171,99 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Enums
                             break;
                         case "C2C":
                             result += "." + UNIT_CENTRAL2C;
+                            break;
+                        default:
+                            result += ".00";
+                            break;
+                    }
+                    break;
+               // case "KANTOR":
+               //     result = DIVISI_KANTOR;
+               //     switch (unitCode)
+               //     {
+               //         case "C1A":
+               //             result += "." + UNIT_DESIGNER;
+               //             break;
+               //         case "C1B":
+               //             result += "." + UNIT_PERSONALIA;
+               //             break;
+               //         case "C2A":
+               //             result += "." + UNIT_ACCOUNTING;
+               //             break;
+               //         case "C2B":
+               //             result += "." + UNIT_PENJUALAN_ONLINE;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_PENJUALAN_UMUM;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_VVIP;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_PEMBELIAN;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_UMUM;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_IT;
+               //             break;
+               //         default:
+               //             result += ".00";
+               //             break;
+               //     }
+               //     break;
+               // case "PRODUKSI":
+               //     result = DIVISI_PRODUKSI;
+               //     switch (unitCode)
+               //     {
+               //         case "C1A":
+               //             result += "." + UNIT_GUDANG_BAHAN_BAKU;
+               //             break;
+               //         case "C1B":
+               //             result += "." + UNIT_GUDANG_CUTTING;
+               //             break;
+               //         case "C2A":
+               //             result += "." + UNIT_GUDANG_ACCESORIES;
+               //             break;
+               //         case "C2B":
+               //             result += "." + UNIT_SEWING;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_FINISHING;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_POLA_SAMPEL;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_PPIC;
+               //             break;
+               //         case "C2C":
+               //             result += "." + UNIT_GUDANG_BARANG_JADI;
+               //             break;
+               //         default:
+               //             result += ".00";
+               //             break;
+               //     }
+               //     break;
+                case "PT. EFRATA RETAILINDO":
+                    result = PT_EFRATA_RETAILINDO;
+                    switch (unitCode)
+                    {
+                        case "E04":
+                            result += "." + UNIT_GUDANG_PEMBELIAN_UMUM;
+                            break;
+                        case "E05":
+                            result += "." + UNIT_GUDANG_UMUM;
+                            break;
+                        case "E06":
+                            result += "." + UNIT_GUDANG_ACCESORIES;
+                            break;
+                        case "E07":
+                            result += "." + UNIT_GUDANG_FABRIC;
+                            break;
+                        case "E08":
+                            result += "." + UNIT_GUDANG_CUTTING;
                             break;
                         default:
                             result += ".00";
@@ -230,17 +348,23 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Enums
             var result = "";
             switch (incomeTaxArticle.ToString().ToUpper().Replace(" ", ""))
             {
-                case "FINAL":
-                    result = PPH_FINAL + ".00." + GetDivisionAndUnitCOACode(division, unitCode);
-                    break;
                 case "PASAL21":
-                    result = PPH21_YMH + ".00." + GetDivisionAndUnitCOACode(division, unitCode);
+                    result = PPH21_YMH + ".01." + GetDivisionAndUnitCOACode(division, unitCode);
+                    break;
+                case "PASAL22":
+                    result = PPH22_YMH + ".02." + GetDivisionAndUnitCOACode(division, unitCode);
                     break;
                 case "PASAL23":
-                    result = PPH23_YMH + ".00." + GetDivisionAndUnitCOACode(division, unitCode);
+                    result = PPH23_MHY + ".03." + GetDivisionAndUnitCOACode(division, unitCode);
+                    break;
+                case "PASAL25":
+                    result = PPH26_YMH + ".07." + GetDivisionAndUnitCOACode(division, unitCode);
+                    break;
+                case "PASAL29":
+                    result = PPH26_YMH + ".07." + GetDivisionAndUnitCOACode(division, unitCode);
                     break;
                 case "PASAL26":
-                    result = PPH26_YMH + ".00." + GetDivisionAndUnitCOACode(division, unitCode);
+                    result = PPH26_YMH + ".05." + GetDivisionAndUnitCOACode(division, unitCode);
                     break;
                 default:
                     result = DEFAULT_COA_IF_EMPTY + ".00." + GetDivisionAndUnitCOACode(division, unitCode);

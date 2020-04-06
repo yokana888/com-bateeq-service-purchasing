@@ -113,6 +113,15 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades
             return Result;
         }
 
+        public List<UnitPaymentOrder> ReadByEPONo(string no)
+        {
+            var Result = dbSet
+                .Include(m => m.Items)
+                    .ThenInclude(i => i.Details).Where(m => m.Items.Any(d => d.Details.Any(f => f.EPONo==no)))
+                .ToList();
+            return Result;
+        }
+
         public async Task<int> Create(UnitPaymentOrder model, string user, bool isImport, int clientTimeZoneOffset = 7)
         {
             int Created = 0;
@@ -1200,6 +1209,25 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades
                             PurchasingCOA = "9999.00",
                             StockCOA = "9999.00"
                         };
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(category.ImportDebtCOA))
+                        {
+                            category.ImportDebtCOA = "9999.00";
+                        }
+                        if (string.IsNullOrEmpty(category.LocalDebtCOA))
+                        {
+                            category.LocalDebtCOA = "9999.00";
+                        }
+                        if (string.IsNullOrEmpty(category.PurchasingCOA))
+                        {
+                            category.PurchasingCOA = "9999.00";
+                        }
+                        if (string.IsNullOrEmpty(category.StockCOA))
+                        {
+                            category.StockCOA = "9999.00";
+                        }
                     }
 
                     var total = 0.1 * (urnItem.PricePerDealUnit * urnItem.ReceiptQuantity);
