@@ -443,13 +443,25 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.GarmentPurchaseRequestTes
                 {
                     new GarmentPurchaseRequestItemViewModel
                     {
+                        UId = null,
                         Category = new CategoryViewModel(),
                         Product = new ProductViewModel(),
                         Uom = new UomViewModel(),
+                        Status = null,
+                        IsUsed = false,
                         PriceUom = new UomViewModel(),
                         Quantity = 5,
                         BudgetPrice = 2,
-                        PriceConversion = 1
+                        PriceConversion = 1,
+                        IsOpenPO = false,
+                        OpenPOBy = null,
+                        OpenPODate = DateTimeOffset.MinValue,
+                        IsApprovedOpenPOMD = false,
+                        ApprovedOpenPOMDBy = null,
+                        ApprovedOpenPOPurchasingDate = DateTimeOffset.MinValue,
+                        IsApprovedOpenPOPurchasing = false,
+                        ApprovedOpenPOPurchasingBy = null,
+                        ApprovedOpenPOMDDate = DateTimeOffset.MinValue,
                     }
                 }
             });
@@ -780,7 +792,7 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.GarmentPurchaseRequestTes
 
             var model = await dataUtil(facade, GetCurrentMethod()).GetTestData();
 
-            var Response = facadevld.GetDisplayReport(model.UnitId, null, null, "{}", 7);
+            var Response = facadevld.GetDisplayReport(model.UnitId, model.SectionName, null, null, "{}", 7);
 
             Assert.NotEmpty(Response.Item1);
         }
@@ -793,7 +805,7 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.GarmentPurchaseRequestTes
 
             var model = await dataUtil(facade, GetCurrentMethod()).GetTestData();
 
-            var Response = facadevld.GetDisplayReport(model.UnitId, model.ShipmentDate.DateTime.AddDays(30), model.ShipmentDate.DateTime.AddDays(30), "{}", 7);
+            var Response = facadevld.GetDisplayReport(model.UnitId, model.SectionName, model.ValidatedMD2Date.DateTime.AddDays(30), model.ValidatedMD2Date.DateTime.AddDays(30), "{}", 7);
 
         }
 
@@ -805,7 +817,7 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.GarmentPurchaseRequestTes
 
             var model = await dataUtil(facade, GetCurrentMethod()).GetTestData();
 
-            var Response = facadevld.GenerateExcel(model.UnitId, null, null, 7);
+            var Response = facadevld.GenerateExcel(model.UnitId, model.SectionName, null, null, 7);
 
             Assert.IsType<System.IO.MemoryStream>(Response);
         }
@@ -818,7 +830,7 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.GarmentPurchaseRequestTes
 
             var model = await dataUtil(facade, GetCurrentMethod()).GetTestData();
 
-            var Response = facadevld.GenerateExcel(model.UnitId, model.ShipmentDate.DateTime.AddDays(30), model.ShipmentDate.DateTime.AddDays(30), 7);
+            var Response = facadevld.GenerateExcel(model.UnitId, model.SectionName, model.ValidatedMD2Date.DateTime.AddDays(30), model.ValidatedMD2Date.DateTime.AddDays(30), 7);
 
             Assert.IsType<System.IO.MemoryStream>(Response);
         }

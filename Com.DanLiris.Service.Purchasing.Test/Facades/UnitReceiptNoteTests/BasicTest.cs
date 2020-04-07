@@ -349,7 +349,7 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.UnitReceiptNoteTests
                 CurrencyCode = "CurrencyCode",
                 UseIncomeTax = true,
                 UseVat = false,
-                CategoryId = "CategoryId"
+                CategoryId = "1"
             });
 
             var response = facade.ReadBySupplierUnit(Filter: filter);
@@ -444,6 +444,16 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.UnitReceiptNoteTests
             UnitReceiptNoteFacade facade = new UnitReceiptNoteFacade(_ServiceProvider(GetCurrentMethod()).Object, dbContext);
             var dataUtil = await _dataUtil(facade, dbContext, GetCurrentMethod()).GetTestData(USERNAME);
             var response = facade.GenerateExcelSpb(dataUtil.URNNo, "", "", null, null, 1);
+            Assert.NotNull(response);
+        }
+
+        [Fact]
+        public async Task Should_Success_Get_Creditor_Account_Data()
+        {
+            var dbContext = _dbContext(GetCurrentMethod());
+            UnitReceiptNoteFacade facade = new UnitReceiptNoteFacade(_ServiceProvider(GetCurrentMethod()).Object, dbContext);
+            var dataUtil = await _dataUtil(facade, dbContext, GetCurrentMethod()).GetTestData(USERNAME);
+            var response = facade.GetCreditorAccountDataByURNNo(dataUtil.URNNo);
             Assert.NotNull(response);
         }
         //[Fact]

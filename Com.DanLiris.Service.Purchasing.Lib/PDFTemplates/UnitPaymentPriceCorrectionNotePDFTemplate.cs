@@ -53,12 +53,12 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
                 //document.Add(companyName);
 
                 PdfPTable tableHeader = new PdfPTable(3);
-                tableHeader.SetWidths(new float[] { 4f, 5f, 4f });
+                tableHeader.SetWidths(new float[] { 5f, 5f, 4f });
                 PdfPCell cellHeaderContentLeft = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_LEFT };
                 PdfPCell cellHeaderContentRight = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_RIGHT };
                 PdfPCell cellHeaderContentCenter = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_CENTER };
 
-                cellHeaderContentLeft.Phrase = new Phrase("PT EFRATA RETAILINDO", bold_font);
+                cellHeaderContentLeft.Phrase = new Phrase("PT. EFRATA RETAILINDO", bold_font);
                 tableHeader.AddCell(cellHeaderContentLeft);
 
                 cellHeaderContentCenter.Phrase = new Phrase("NOTA KOREKSI", bold_font);
@@ -149,7 +149,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
 
                 PdfPTable tableContent = new PdfPTable(8);
-                tableContent.SetWidths(new float[] { 1f, 6f, 2f, 1.5f, 2f, 1.5f, 2f, 3f });
+                tableContent.SetWidths(new float[] { 1f, 6f, 2f, 1.5f, 2f, 1.5f, 2f, 4f });
 
                 cellCenter.Phrase = new Phrase("No", small_bold_font);
                 tableContent.AddCell(cellCenter);

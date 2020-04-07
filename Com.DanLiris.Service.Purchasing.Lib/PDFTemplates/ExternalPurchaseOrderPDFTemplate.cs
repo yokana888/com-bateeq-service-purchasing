@@ -35,7 +35,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             PdfPCell cellHeaderContentLeft = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_LEFT };
             PdfPCell cellHeaderContentRight = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_RIGHT };
 
-            cellHeaderContentLeft.Phrase = new Phrase("PT DAN LIRIS", bold_font4);
+            cellHeaderContentLeft.Phrase = new Phrase("PT. EFRATA RETAILINDO", bold_font4);
             tableHeader.AddCell(cellHeaderContentLeft);
             cellHeaderContentRight.Phrase = new Phrase("FM-PB-00-06-009/R1", bold_font);
             tableHeader.AddCell(cellHeaderContentRight);
@@ -48,7 +48,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             //cellHeaderContentRight.Phrase = new Phrase("FM-PB-00-06-009/R1", bold_font2);
             //tableHeader.AddCell(cellHeaderContentRight);
 
-            cellHeaderContentLeft.Phrase = new Phrase("JL. Merapi No.23" +"\n"+ "Banaran, Grogol" + "\n" + "Sukoharjo 57552" + "\n" + "JAWA TENGAH" + "\n" + "Telp. (0271) 740888, 714400" + "\n" + "Fax. (0271) 735222, 740777", bold_font);
+            cellHeaderContentLeft.Phrase = new Phrase("Head Office:" + "\n"+ "Kelurahan Banaran"+ "\n" + "Kecamatan Grogol" + "\n" + "Sukoharjo 57552" + "\n" + "JAWA TENGAH" + "\n" + "Telp. (0271) ) 740888, 719911" + "\n" + "Fax. (0271) ) 735222, 740777", bold_font);
             tableHeader.AddCell(cellHeaderContentLeft);
 
             cellHeaderContentRight.Phrase = new Phrase("Nomor PO: " + viewModel.no, bold_font2);
@@ -105,7 +105,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             #endregion
 
             document.Add(new Paragraph("Dengan Hormat,", normal_font) { Alignment = Element.ALIGN_LEFT });
-            string firstParagraphString = "Yang bertanda tangan di bawah ini, PT. DAN LIRIS, SOLO (selanjutnya disebut sebagai pihak Pembeli) dan " + viewModel.supplier.name + "(selanjutnya disebut sebagai pihak Penjual) saling menyetujui untuk mengadaan kontrak jual beli dengan ketentuan sebagai berikut : ";
+            string firstParagraphString = "Yang bertanda tangan di bawah ini, PT. EFRATA RETAILINDO (selanjutnya disebut sebagai pihak Pembeli) dan " + viewModel.supplier.name + "(selanjutnya disebut sebagai pihak Penjual) saling menyetujui untuk mengadaan kontrak jual beli dengan ketentuan sebagai berikut : ";
             Paragraph firstParagraph = new Paragraph(firstParagraphString, small_font) { Alignment = Element.ALIGN_LEFT };
             
             firstParagraph.SpacingAfter = 10f;
@@ -269,10 +269,12 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
             #region TableSignature
 
-            PdfPTable tableSignature = new PdfPTable(2);
+            PdfPTable tableSignature = new PdfPTable(3);
 
             PdfPCell cellSignatureContent = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_CENTER };
             cellSignatureContent.Phrase = new Phrase("Pembeli\n\n\n\n\n\n\n(  "+ viewModel.CreatedBy + "  )", bold_font);
+            tableSignature.AddCell(cellSignatureContent);
+            cellSignatureContent.Phrase = new Phrase("Menyetujui\n\n\n\n\n\n\n(  " + "Adi Nugroho" + "  )", bold_font);
             tableSignature.AddCell(cellSignatureContent);
             cellSignatureContent.Phrase = new Phrase("Penjual\n\n\n\n\n\n\n(  " + viewModel.supplier.name + "  )", bold_font);
             tableSignature.AddCell(cellSignatureContent);

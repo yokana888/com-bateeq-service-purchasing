@@ -1,4 +1,5 @@
 ﻿using Com.DanLiris.Service.Purchasing.Lib;
+using Com.DanLiris.Service.Purchasing.Lib.Enums;
 using Com.DanLiris.Service.Purchasing.Lib.Facades;
 using Com.DanLiris.Service.Purchasing.Lib.Facades.ExternalPurchaseOrderFacade;
 using Com.DanLiris.Service.Purchasing.Lib.Facades.InternalPO;
@@ -6,6 +7,7 @@ using Com.DanLiris.Service.Purchasing.Lib.Facades.UnitReceiptNoteFacade;
 using Com.DanLiris.Service.Purchasing.Lib.Interfaces;
 using Com.DanLiris.Service.Purchasing.Lib.Services;
 using Com.DanLiris.Service.Purchasing.Lib.Utilities.CacheManager;
+using Com.DanLiris.Service.Purchasing.Lib.Utilities.CacheManager.CacheData;
 using Com.DanLiris.Service.Purchasing.Lib.Utilities.Currencies;
 using Com.DanLiris.Service.Purchasing.Lib.ViewModels.UnitPaymentOrderViewModel;
 using Com.DanLiris.Service.Purchasing.Test.DataUtils.DeliveryOrderDataUtils;
@@ -80,9 +82,14 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.UnitPaymentOrderTests
             var serviceProviders = services.BuildServiceProvider();
             var memoryCache = serviceProviders.GetService<IMemoryCache>();
 
+            //var memoryCacheService = serviceProviders.GetService<IMemoryCacheManager>();
+            //memoryCacheService.Set(MemoryCacheConstant.Categories, new List<CategoryCOAResult>() { new CategoryCOAResult() { _id = 1 } });
+
+            var memoryCacheManager = new MemoryCacheManager(memoryCache);
+            memoryCacheManager.Set(MemoryCacheConstant.Categories, new List<CategoryCOAResult>() { new CategoryCOAResult() { _id = 1 } });
             serviceProvider
                 .Setup(x => x.GetService(typeof(IMemoryCacheManager)))
-                .Returns(new MemoryCacheManager(memoryCache));
+                .Returns(memoryCacheManager);
 
             var mockCurrencyProvider = new Mock<ICurrencyProvider>();
             mockCurrencyProvider
@@ -94,6 +101,7 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.UnitPaymentOrderTests
 
             return serviceProvider;
         }
+
         private UnitPaymentOrderDataUtil _dataUtil(UnitPaymentOrderFacade facade, string testName)
         {
             
@@ -138,6 +146,22 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.UnitPaymentOrderTests
             UnitPaymentOrderFacade facade = new UnitPaymentOrderFacade(GetServiceProvider(GetCurrentMethod()).Object, _dbContext(GetCurrentMethod()));
             var model = await _dataUtil(facade, GetCurrentMethod()).GetTestData();
             var Response = facade.ReadById((int)model.Id);
+            Assert.NotNull(Response);
+        }
+        [Fact]
+        public async Task Should_Success_Get_Data_By_EPONo()
+        {
+            UnitPaymentOrderFacade facade = new UnitPaymentOrderFacade(GetServiceProvider(GetCurrentMethod()).Object, _dbContext(GetCurrentMethod()));
+            var model = await _dataUtil(facade, GetCurrentMethod()).GetNewData();
+            foreach(var i in model.Items)
+            {
+                foreach(var d in i.Details)
+                {
+                    d.EPONo = "EPONo";
+                }
+            }
+            await facade.Create(model, "Unit Test", false);
+            var Response = facade.ReadByEPONo("EPONo");
             Assert.NotNull(Response);
         }
 
@@ -302,6 +326,9 @@ namespace Com.DanLiris.Service.Purchasing.Test.Facades.UnitPaymentOrderTests
         [Fact]
         public async Task Should_Success_Create_DataWithVAT()
         {
+            var serviceProvider = GetServiceProvider(GetCurrentMethod()).Object;
+            var memoryCacheService = serviceProvider.GetService<IMemoryCacheManager>();
+            memoryCacheService.Set(MemoryCacheConstant.Categories, new List<CategoryCOAResult>() { new CategoryCOAResult() { _id = 1 } });
 
             UnitPaymentOrderFacade facade = new UnitPaymentOrderFacade(GetServiceProvider(GetCurrentMethod()).Object, _dbContext(GetCurrentMethod()));
 

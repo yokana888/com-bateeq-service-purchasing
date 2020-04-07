@@ -47,7 +47,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.GarmentPurchaseRequestFaca
 
             List<string> searchAttributes = new List<string>()
             {
-                "PRType", "SCNo", "PRNo", "RONo", "BuyerCode", "BuyerName", "UnitName", "Article"
+                "PRType", "SCNo", "PRNo", "RONo", "BuyerCode", "BuyerName", "UnitName", "Article","SectionName"
             };
 
             Query = QueryHelper<GarmentPurchaseRequest>.ConfigureSearch(Query, searchAttributes, Keyword);
@@ -124,6 +124,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.GarmentPurchaseRequestFaca
                 ValidatedMD1Date = s.ValidatedMD1Date,
                 ValidatedMD2Date = s.ValidatedMD2Date,
                 ValidatedPurchasingDate = s.ValidatedPurchasingDate,
+                SectionName=s.SectionName
 
             });
 
@@ -355,7 +356,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.GarmentPurchaseRequestFaca
                         {
                             oldM.Article = m.Article;
                             oldM.Date = m.Date;
-                            oldM.ExpectedDeliveryDate = m.ExpectedDeliveryDate;
+                            oldM.ShipmentDate = m.ShipmentDate;
                             oldM.Remark = m.Remark;
                         }
                         oldM.IsUsed = m.IsUsed;
@@ -1372,7 +1373,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.GarmentPurchaseRequestFaca
             var purchaseRequestIds = queryResult.Select(s => s.PRId).Distinct().ToList();
             var purchaseRequests = dbContext.GarmentPurchaseRequests.Where(w => purchaseRequestIds.Contains(w.Id)).Select(s => new { s.Id, s.PRNo, s.Date, s.UnitName, s.BuyerCode, s.BuyerName, s.RONo, s.Article, s.ShipmentDate, s.IsUsed }).ToList();
             var purchaseRequestItemIds = queryResult.Select(s => s.PRItemId).Distinct().ToList();
-            var purchaseRequestItems = dbContext.GarmentPurchaseRequestItems.Where(w => purchaseRequestItemIds.Contains(w.Id)).Select(s => new { s.Id, s.PO_SerialNumber, s.ProductCode, s.ProductName, s.ProductRemark, s.BudgetPrice }).ToList();
+            var purchaseRequestItems = dbContext.GarmentPurchaseRequestItems.Where(w => purchaseRequestItemIds.Contains(w.Id)).Select(s => new { s.Id, s.PO_SerialNumber, s.ProductCode, s.ProductName, s.ProductRemark, s.BudgetPrice, s.IsUsed }).ToList();
 
             var purchaseOrderInternalIds = queryResult.Select(s => s.POId).Distinct().ToList();
             var purchaseOrderInternals = dbContext.GarmentInternalPurchaseOrders.Where(w => purchaseOrderInternalIds.Contains(w.Id)).Select(s => new { s.Id, s.CreatedUtc, s.CreatedBy }).ToList();
@@ -1532,7 +1533,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.GarmentPurchaseRequestFaca
                         username = purchaseOrderInternal == null ? "" : purchaseOrderInternal.CreatedBy,
                         useIncomeTax = purchaseOrderExternal == null ? "" : purchaseOrderExternal.IsIncomeTax ? "YA" : "TIDAK",
                         useVat = purchaseOrderExternal == null ? "" : purchaseOrderExternal.IsUseVat ? "YA" : "TIDAK",
-                        useInternalPO = purchaseRequest.IsUsed ? "YA" : "TIDAK",
+                        useInternalPO = purchaseRequestItem.IsUsed ? "YA" : "TIDAK",
                         status = purchaseOrderInternalItem == null ? "" : purchaseOrderInternalItem.Status,
                         doNo = deliveryOrder == null ? "" : deliveryOrder.DONo,
                         doDate = deliveryOrder == null ? "" : deliveryOrder.DODate.AddHours(offset).ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
