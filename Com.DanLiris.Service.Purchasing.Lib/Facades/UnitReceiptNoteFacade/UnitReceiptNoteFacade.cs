@@ -1504,7 +1504,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.UnitReceiptNoteFacade
             result.Columns.Add(new DataColumn() { ColumnName = "Jumlah Terima", DataType = typeof(double) });
             result.Columns.Add(new DataColumn() { ColumnName = "Satuan Terima", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Jumlah (+/-/0)", DataType = typeof(double) });
-            result.Columns.Add(new DataColumn() { ColumnName = "Harga", DataType = typeof(double) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Harga per Unit", DataType = typeof(double) });
             result.Columns.Add(new DataColumn() { ColumnName = "Total", DataType = typeof(double) });
             if (Query.ToArray().Count() == 0)
                 result.Rows.Add("", "", "", "", "", "", "", "", "", 0, "", 0, "", 0, 0, 0); // to allow column name to be generated properly for empty data as template
