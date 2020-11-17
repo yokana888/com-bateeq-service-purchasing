@@ -269,7 +269,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
             #region TableSignature
 
-            PdfPTable tableSignature = new PdfPTable(3);
+            PdfPTable tableSignature = new PdfPTable(2);
 
             PdfPCell cellSignatureContent = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_CENTER };
             cellSignatureContent.Phrase = new Phrase("Pembeli\n\n\n\n\n\n\n(  "+ viewModel.CreatedBy + "  )", bold_font);
