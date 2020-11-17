@@ -276,8 +276,8 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             tableSignature.AddCell(cellSignatureContent);
             cellSignatureContent.Phrase = new Phrase("Menyetujui\n\n\n\n\n\n\n(  " + "Adi Nugroho" + "  )", bold_font);
             tableSignature.AddCell(cellSignatureContent);
-            cellSignatureContent.Phrase = new Phrase("Penjual\n\n\n\n\n\n\n(  " + viewModel.supplier.name + "  )", bold_font);
-            tableSignature.AddCell(cellSignatureContent);
+            //cellSignatureContent.Phrase = new Phrase("Penjual\n\n\n\n\n\n\n(  " + viewModel.supplier.name + "  )", bold_font);
+            //tableSignature.AddCell(cellSignatureContent);
 
 
             PdfPCell cellSignature = new PdfPCell(tableSignature); // dont remove
