@@ -1439,6 +1439,8 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.UnitReceiptNoteFacade
                              DealUom = k.DealUomUnit,
                              dealQuantity = k.DealQuantity,
                              quantity = k.DealQuantity,
+                             price = k.PricePerDealUnit,
+                             DealPrice = (k.PricePerDealUnit* k.DealQuantity),
                              CreatedUtc = b.CreatedUtc
                          });
             Dictionary<string, double> q = new Dictionary<string, double>();
@@ -1502,8 +1504,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.UnitReceiptNoteFacade
             result.Columns.Add(new DataColumn() { ColumnName = "Jumlah Terima", DataType = typeof(double) });
             result.Columns.Add(new DataColumn() { ColumnName = "Satuan Terima", DataType = typeof(String) });
             result.Columns.Add(new DataColumn() { ColumnName = "Jumlah (+/-/0)", DataType = typeof(double) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Harga per Unit", DataType = typeof(double) });
+            result.Columns.Add(new DataColumn() { ColumnName = "Total", DataType = typeof(double) });
             if (Query.ToArray().Count() == 0)
-                result.Rows.Add("", "", "", "", "", "", "", "", "", 0, "", 0, "", 0); // to allow column name to be generated properly for empty data as template
+                result.Rows.Add("", "", "", "", "", "", "", "", "", 0, "", 0, "", 0, 0, 0); // to allow column name to be generated properly for empty data as template
             else
             {
                 int index = 0;
@@ -1511,7 +1515,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades.UnitReceiptNoteFacade
                 {
                     index++;
                     string date = item.receiptDate == null ? "-" : item.receiptDate.ToOffset(new TimeSpan(offset, 0, 0)).ToString("dd MMM yyyy", new CultureInfo("id-ID"));
-                    result.Rows.Add(index, item.unit, item.category, item.prNo, item.productName, item.productCode, item.supplier, date, item.urnNo, item.dealQuantity, item.DealUom, item.receiptQuantity, item.receiptUom, item.quantity);
+                    result.Rows.Add(index, item.unit, item.category, item.prNo, item.productName, item.productCode, item.supplier, date, item.urnNo, item.dealQuantity, item.DealUom, item.receiptQuantity, item.receiptUom, item.quantity, item.price, item.DealPrice);
                 }
             }
 
