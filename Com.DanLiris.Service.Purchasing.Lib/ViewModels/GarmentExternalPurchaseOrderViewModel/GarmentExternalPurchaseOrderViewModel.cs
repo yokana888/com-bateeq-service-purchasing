@@ -26,9 +26,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.GarmentExternalPurchase
 
         public bool IsUseVat { get; set; }
 
-        public int VatId { get; set; }
-        public double VatRate { get; set; }
-
         public string Category { get; set; }
         public string Remark { get; set; }
         public bool IsPosted { get; set; }
@@ -68,14 +65,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.GarmentExternalPurchase
             else if (this.OrderDate != null && this.OrderDate > this.DeliveryDate)
             {
                 yield return new ValidationResult("OrderDate is greater than delivery date", new List<string> { "DeliveryDate" });
-            }
-
-            if (IsUseVat)
-            {
-                if (VatRate <= 0)
-                {
-                    yield return new ValidationResult("VatRate is required", new List<string> { "VatRate" });
-                }
             }
 
             if (Category == "FABRIC")

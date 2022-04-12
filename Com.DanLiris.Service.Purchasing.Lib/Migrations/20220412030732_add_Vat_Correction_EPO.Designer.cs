@@ -12,9 +12,10 @@ using System;
 namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 {
     [DbContext(typeof(PurchasingDbContext))]
-    partial class PurchasingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220412030732_add_Vat_Correction_EPO")]
+    partial class add_Vat_Correction_EPO
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -5183,12 +5184,8 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 
                     b.Property<DateTimeOffset>("VatDate");
 
-                    b.Property<int>("VatId");
-
                     b.Property<string>("VatNo")
                         .HasMaxLength(255);
-
-                    b.Property<double>("VatRate");
 
                     b.HasKey("Id");
 

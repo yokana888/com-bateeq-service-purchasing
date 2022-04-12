@@ -45,6 +45,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Models.UnitPaymentCorrectionNoteMo
         public DateTimeOffset? DueDate { get; set; }
         public string Remark { get; set; }
         public string ReturNoteNo { get; set; }
+
+        public int VatId { get; set; }
+        public double VatRate { get; set; }
+
         public virtual ICollection<UnitPaymentCorrectionNoteItem> Items { get; set; }
     }
 }
