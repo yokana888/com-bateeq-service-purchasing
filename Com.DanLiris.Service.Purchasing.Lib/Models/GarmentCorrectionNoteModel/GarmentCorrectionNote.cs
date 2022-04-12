@@ -42,9 +42,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Models.GarmentCorrectionNoteModel
         public string NKPN { get; set; }
         public string NKPH { get; set; }
 
-        public int VatId { get; set; }
-        public double VatRate { get; set; }
-
         public virtual ICollection<GarmentCorrectionNoteItem> Items { get; set; }
     }
 }

@@ -33,6 +33,8 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.UnitPaymentCorrectionNo
         public DateTimeOffset? dueDate { get; set; }
         public string remark { get; set; }
         public string returNoteNo { get; set; }
+        public int vatId { get; set; }
+        public double vatRate { get; set; }
         public List<UnitPaymentCorrectionNoteItemViewModel> items { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -55,6 +57,15 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.UnitPaymentCorrectionNo
                 yield return new ValidationResult("Supplier is required", new List<string> { "supplier" });
             }
             int itemErrorCount = 0;
+
+
+            if (useVat)
+            {
+                if (vatRate <= 0)
+                {
+                    yield return new ValidationResult("VatRate is required", new List<string> { "VatRate" });
+                }
+            }
 
             if (this.items.Count.Equals(0))
             {

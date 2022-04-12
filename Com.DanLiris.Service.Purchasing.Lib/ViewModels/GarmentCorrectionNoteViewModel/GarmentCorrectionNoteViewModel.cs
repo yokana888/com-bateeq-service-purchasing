@@ -30,8 +30,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.GarmentCorrectionNoteVi
         public decimal TotalCorrection { get; set; }
         public string NKPN { get; set; }
         public string NKPH { get; set; }
-        public int VatId { get; set; }
-        public double VatRate { get; set; }
 
         public List<GarmentCorrectionNoteItemViewModel> Items { get; set; }
 
@@ -42,13 +40,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.GarmentCorrectionNoteVi
                 yield return new ValidationResult("Jenis Koreksi harus berupa 'Harga Satuan' atau 'Harga Total'", new List<string> { "CorrectionType" });
             }
 
-            if (UseVat)
-            {
-                if (VatRate <= 0)
-                {
-                    yield return new ValidationResult("VatRate is required", new List<string> { "VatRate" });
-                }
-            }
 
             if (string.IsNullOrWhiteSpace(DONo))
             {
