@@ -12,9 +12,10 @@ using System;
 namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 {
     [DbContext(typeof(PurchasingDbContext))]
-    partial class PurchasingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220411070025_add_Vat_EPO")]
+    partial class add_Vat_EPO
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -998,10 +999,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 
                     b.Property<bool>("UseVat");
 
-                    b.Property<int>("VatId");
-
-                    b.Property<double>("VatRate");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EPONo")
@@ -1901,6 +1898,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 
                     b.Property<string>("UId")
                         .HasMaxLength(255);
+
+                    b.Property<int>("VatId");
+
+                    b.Property<double>("VatRate");
 
                     b.Property<string>("Washing")
                         .HasMaxLength(1000);
@@ -4941,10 +4942,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
                     b.Property<long>("UPOId");
 
                     b.Property<string>("UPONo");
-
-                    b.Property<int>("VatId");
-
-                    b.Property<double>("VatRate");
 
                     b.Property<DateTimeOffset?>("VatTaxCorrectionDate");
 

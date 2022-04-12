@@ -35,6 +35,9 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.ExternalPurchaseOrderVi
         public bool isClosed { get; set; }
         public bool isCanceled { get; set; }
         public string remark { get; set; }
+
+        public int vatId { get; set; }
+        public double vatRate { get; set; }
         public List<ExternalPurchaseOrderItemViewModel> items { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -74,6 +77,14 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.ExternalPurchaseOrderVi
                 if (string.IsNullOrEmpty(incomeTaxBy))
                 {
                     yield return new ValidationResult("Income tax by is required", new List<string> { "incomeTaxBy" });
+                }
+            }
+
+            if (useVat)
+            {
+                if (vatRate <= 0)
+                {
+                    yield return new ValidationResult("VatRate is required", new List<string> { "VatRate" });
                 }
             }
 

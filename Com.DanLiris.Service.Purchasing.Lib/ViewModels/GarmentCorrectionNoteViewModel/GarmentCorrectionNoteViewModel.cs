@@ -38,7 +38,8 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.GarmentCorrectionNoteVi
             if (string.IsNullOrWhiteSpace(CorrectionType) || (CorrectionType.ToUpper() != "HARGA SATUAN" && CorrectionType.ToUpper() != "HARGA TOTAL" && CorrectionType.ToUpper() != "JUMLAH" && CorrectionType.ToUpper() != "RETUR") )
             {
                 yield return new ValidationResult("Jenis Koreksi harus berupa 'Harga Satuan' atau 'Harga Total'", new List<string> { "CorrectionType" });
-            } 
+            }
+
 
             if (string.IsNullOrWhiteSpace(DONo))
             {

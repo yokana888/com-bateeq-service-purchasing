@@ -25,6 +25,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.GarmentExternalPurchase
         public IncomeTaxViewModel IncomeTax { get; set; }
 
         public bool IsUseVat { get; set; }
+
         public string Category { get; set; }
         public string Remark { get; set; }
         public bool IsPosted { get; set; }
@@ -100,6 +101,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.ViewModels.GarmentExternalPurchase
                 {
                     yield return new ValidationResult("Shrinkage is required", new List<string> { "Shrinkage" });
                 }
+                
             }
 
             if (Items == null || Items.Count <= 0)
