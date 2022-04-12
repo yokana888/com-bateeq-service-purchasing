@@ -72,8 +72,10 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Models.UnitPaymentOrderModel
         [MaxLength(255)]
         public string VatNo { get; set; }
         public DateTimeOffset VatDate { get; set; }
+		public int VatId { get; set; }
+		public double VatRate { get; set; }
 
-        public string Remark { get; set; }
+		public string Remark { get; set; }
         public DateTimeOffset DueDate { get; set; }
         public bool IsCorrection { get; set; }
         public bool IsPaid { get; set; }

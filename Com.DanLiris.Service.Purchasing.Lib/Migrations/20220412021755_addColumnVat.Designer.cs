@@ -12,9 +12,10 @@ using System;
 namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
 {
     [DbContext(typeof(PurchasingDbContext))]
-    partial class PurchasingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220412021755_addColumnVat")]
+    partial class addColumnVat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -997,10 +998,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
                     b.Property<bool>("UseIncomeTax");
 
                     b.Property<bool>("UseVat");
-
-                    b.Property<int>("VatId");
-
-                    b.Property<double>("VatRate");
 
                     b.HasKey("Id");
 
@@ -4941,10 +4938,6 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Migrations
                     b.Property<long>("UPOId");
 
                     b.Property<string>("UPONo");
-
-                    b.Property<int>("VatId");
-
-                    b.Property<double>("VatRate");
 
                     b.Property<DateTimeOffset?>("VatTaxCorrectionDate");
 
