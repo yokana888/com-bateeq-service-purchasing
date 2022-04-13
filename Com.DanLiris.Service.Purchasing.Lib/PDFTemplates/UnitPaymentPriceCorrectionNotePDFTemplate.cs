@@ -219,7 +219,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
                     total += priceCorrectionTotal;
 
                 }
-                totalPPn = (0.1 * total);
+                totalPPn = (viewModel.vatRate/100 * total);
                 double pph = double.Parse(viewModelSpb.incomeTax.rate);
                 totalPPh = (pph * total) / 100;
                 totalDibayar = total - totalPPh;
@@ -279,7 +279,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
                 if (viewModel.useVat == false)
                 {
                     totalPPn = 0;
-                    cellIdentityTotalContentLeft.Phrase = new Phrase("PPn 10%", normal_font);
+                    cellIdentityTotalContentLeft.Phrase = new Phrase($"PPn {viewModel.vatRate}%", normal_font);
                     tableTotal.AddCell(cellIdentityTotalContentLeft);
                     cellIdentityTotalContentLeft.Phrase = new Phrase(" ");
                     tableTotal.AddCell(cellIdentityTotalContentLeft);
@@ -288,7 +288,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
                 }
                 else
                 {
-                    cellIdentityTotalContentLeft.Phrase = new Phrase("PPn 10%", normal_font);
+                    cellIdentityTotalContentLeft.Phrase = new Phrase($"PPn {viewModel.vatRate}%", normal_font);
                     tableTotal.AddCell(cellIdentityTotalContentLeft);
                     cellIdentityTotalContentLeft.Phrase = new Phrase($"{currencyCodePPn}", normal_font);
                     tableTotal.AddCell(cellIdentityTotalContentLeft);

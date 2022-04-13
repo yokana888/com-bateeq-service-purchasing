@@ -195,7 +195,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
                     total += (item.priceTotalAfter * -1);
 
                 }
-                totalPPn = (0.1 * total);
+                totalPPn = (viewModel.vatRate/100 * total);
                 double pph = double.Parse(viewModelSpb.incomeTax.rate);
                 totalPPh = (pph * total) / 100;
 
@@ -249,7 +249,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
                 }
                 cellIdentityTotalContentLeft.Phrase = new Phrase(" ");
                 tableTotal.AddCell(cellIdentityTotalContentLeft);
-                cellIdentityTotalContentLeft.Phrase = new Phrase("PPn 10%", normal_font);
+                cellIdentityTotalContentLeft.Phrase = new Phrase($"PPn {viewModel.vatRate }% ", normal_font);
                 tableTotal.AddCell(cellIdentityTotalContentLeft);
                 if (viewModel.useVat == false)
                 {
