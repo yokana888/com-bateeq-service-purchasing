@@ -186,9 +186,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             PdfPTable tableTax = new PdfPTable(3);
             tableTax.SetWidths(new float[] { 1f, 0.3f, 1f });
 
-            //var ppn = jumlah / model.VatRate;
-            var ppn = jumlah * (model.VatRate / 100);
-            //var ppn = jumlah * 0.11;
+            var ppn = model.UseVat ? jumlah * model.VatRate/100 :0;
             var total = jumlah + (model.UseVat ? ppn : 0);
             var pph = jumlah * model.IncomeTaxRate / 100;
             var totalWithPph = total - pph;
@@ -245,7 +243,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
             if (model.UseVat)
             {
-                cellJustifyAllNoBorder.Phrase = new Phrase($"PPn" + model.VatRate +" % . . . . . . . . . . . . . .   {model.CurrencyCode}", normal_font);
+                cellJustifyAllNoBorder.Phrase = new Phrase($"PPn " + model.VatRate +$"% . . . . . . . . . . . . . .   {model.CurrencyCode}", normal_font);
                 tableVat.AddCell(cellJustifyAllNoBorder);
             }
             else

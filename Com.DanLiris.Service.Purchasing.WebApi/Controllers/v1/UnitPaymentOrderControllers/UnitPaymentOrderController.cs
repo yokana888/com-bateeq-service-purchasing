@@ -373,6 +373,7 @@ namespace Com.DanLiris.Service.Purchasing.WebApi.Controllers.v1.UnitPaymentOrder
                     s.dueDate,
                     s.date,
                     s.no,
+                    s.VatRate,
                     items = s.items.Select(i => new
                     {
                         unitReceiptNote = new
