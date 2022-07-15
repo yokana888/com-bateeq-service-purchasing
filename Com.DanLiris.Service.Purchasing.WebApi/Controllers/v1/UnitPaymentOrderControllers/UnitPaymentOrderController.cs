@@ -54,6 +54,8 @@ namespace Com.DanLiris.Service.Purchasing.WebApi.Controllers.v1.UnitPaymentOrder
                     s.no,
                     s.useIncomeTax,
                     s.useVat,
+                    vatId = s.VatId,
+                    vatRate = s.VatRate,
                     s.category,
                     s.currency,
                     items = s.items.Select(i => new
