@@ -497,6 +497,8 @@ namespace Com.DanLiris.Service.Purchasing.Lib.Facades
                 UseVat = s.UseVat,
                 VatNo = s.VatNo,
                 VatDate = s.VatDate,
+				VatRate = s.VatRate,
+				VatId = s.VatId,
                 Remark = s.Remark,
                 DueDate = s.DueDate,
                 Date = s.Date,

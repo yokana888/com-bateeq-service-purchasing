@@ -298,6 +298,8 @@ namespace Com.DanLiris.Service.Purchasing.WebApi.Controllers.v1.UnitPaymentOrder
                     s.pibNo,
                     s.useIncomeTax,
                     s.useVat,
+                    vatId = s.VatId,
+                    vatRate = s.VatRate,
                     s.vatNo,
                     s.vatDate,
                     s.remark,
