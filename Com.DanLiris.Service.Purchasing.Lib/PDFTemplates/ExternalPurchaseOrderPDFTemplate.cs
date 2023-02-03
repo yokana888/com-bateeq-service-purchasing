@@ -274,7 +274,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             PdfPCell cellSignatureContent = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_CENTER };
             cellSignatureContent.Phrase = new Phrase("Pembeli\n\n\n\n\n\n\n(  "+ viewModel.CreatedBy + "  )", bold_font);
             tableSignature.AddCell(cellSignatureContent);
-            cellSignatureContent.Phrase = new Phrase("Menyetujui\n\n\n\n\n\n\n(  " + "Adi Nugroho" + "  )", bold_font);
+            cellSignatureContent.Phrase = new Phrase("Menyetujui\n\n\n\n\n\n\n(  " + "Bambang Triadmojo" + "  )", bold_font);
             tableSignature.AddCell(cellSignatureContent);
             //cellSignatureContent.Phrase = new Phrase("Penjual\n\n\n\n\n\n\n(  " + viewModel.supplier.name + "  )", bold_font);
             //tableSignature.AddCell(cellSignatureContent);
