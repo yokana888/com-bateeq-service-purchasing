@@ -58,7 +58,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
                 PdfPCell cellHeaderContentRight = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_RIGHT };
                 PdfPCell cellHeaderContentCenter = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_CENTER };
 
-                cellHeaderContentLeft.Phrase = new Phrase("PT. EFRATA RETAILINDO", bold_font);
+                cellHeaderContentLeft.Phrase = new Phrase("PT. EFRATA GARMINDO UTAMA", bold_font);
                 tableHeader.AddCell(cellHeaderContentLeft);
 
                 cellHeaderContentCenter.Phrase = new Phrase("NOTA KOREKSI", bold_font);
@@ -465,7 +465,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
                 Paragraph pembeliBkp = new Paragraph("Pembeli PKB", smaller_bold_font) { Alignment = Element.ALIGN_LEFT };
                 document.Add(pembeliBkp);
 
-                Paragraph companyName = new Paragraph("Nama     :  PT. EFRATA RETAILINDO", smaller_font) { Alignment = Element.ALIGN_LEFT };
+                Paragraph companyName = new Paragraph("Nama     :  PT. EFRATA GARMINDO UTAMA", smaller_font) { Alignment = Element.ALIGN_LEFT };
                 document.Add(companyName);
 
                 Paragraph companyAddress = new Paragraph("Alamat     :  Banaran, Grogol, Kab. Sukoharjo Jawa Tengah 57552", smaller_font) { Alignment = Element.ALIGN_LEFT };
