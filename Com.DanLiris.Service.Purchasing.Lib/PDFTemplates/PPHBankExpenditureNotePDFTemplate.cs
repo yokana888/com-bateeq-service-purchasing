@@ -47,7 +47,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             cellHeaderCS2.HorizontalAlignment = Element.ALIGN_CENTER;
             headerTable.AddCell(cellHeaderCS2);
 
-            cellHeaderBody.Phrase = new Phrase("PT. EFRATA RETAILINDO", normal_font);
+            cellHeaderBody.Phrase = new Phrase("PT. EFRATA GARMINDO UTAMA", normal_font);
             headerTable1.AddCell(cellHeaderBody);
             cellHeaderBody.Phrase = new Phrase("Kel. Banaran, Kec. Grogol", normal_font);
             headerTable1.AddCell(cellHeaderBody);
