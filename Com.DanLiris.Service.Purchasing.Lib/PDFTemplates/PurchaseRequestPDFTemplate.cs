@@ -26,7 +26,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
             #region Header
 
-            string companyNameString = "PT. EFRATA GARMINDO UTAMA";
+            string companyNameString = "PT. EFRATA RETAILINDO";
             Paragraph companyName = new Paragraph(companyNameString, header_font) { Alignment = Element.ALIGN_CENTER };
             document.Add(companyName);
 

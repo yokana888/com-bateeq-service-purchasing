@@ -48,7 +48,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             tableHeader.SetWidths(new float[] { 1f, 1f, 1f });
 
             PdfPCell cellHeaderContentLeft = new PdfPCell() { Border = Rectangle.NO_BORDER };
-            cellHeaderContentLeft.AddElement(new Phrase("PT. EFRATA GARMINDO UTAMA", header_font));
+            cellHeaderContentLeft.AddElement(new Phrase("PT. EFRATA RETAILINDO", header_font));
             cellHeaderContentLeft.AddElement(new Phrase("BANARAN, GROGOL, SUKOHARJO", normal_font));
             tableHeader.AddCell(cellHeaderContentLeft);
 

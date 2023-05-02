@@ -94,14 +94,14 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
 
             //Jumlah dibayar ke Supplier
             double paidToSupp = dpp + ppn - pphRate;
-            if (viewModel.IncomeTaxBy == "PT. EFRATA GARMINDO UTAMA")
+            if (viewModel.IncomeTaxBy == "PT. EFRATA RETAIINDO")
             {
                 paidToSupp = dpp + ppn;
             }
 
             double amount = dpp + ppn;
 
-            if (viewModel.IncomeTaxBy == "PT. EFRATA GARMINDO UTAMA")
+            if (viewModel.IncomeTaxBy == "PT. EFRATA RETAILINDO")
             {
                 amount = dpp + ppn + pphRate;
             }
@@ -186,7 +186,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             tableIdentity.AddCell(cellLeftNoBorder);
 
             var pphDanliris = pphRate;
-            if (viewModel.IncomeTaxBy == "PT. EFRATA GARMINDO UTAMA")
+            if (viewModel.IncomeTaxBy == "PT. EFRATA RETAILINDO")
             {
                 pphDanliris = 0;
             }
