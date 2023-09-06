@@ -35,7 +35,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             PdfPCell cellHeaderContentLeft = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_LEFT };
             PdfPCell cellHeaderContentRight = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_RIGHT };
 
-            cellHeaderContentLeft.Phrase = new Phrase("PT. EFRATA RETAILINDO", bold_font4);
+            cellHeaderContentLeft.Phrase = new Phrase("PT. EFRATA GARMINDO UTAMA", bold_font4);
             tableHeader.AddCell(cellHeaderContentLeft);
             cellHeaderContentRight.Phrase = new Phrase("FM-PB-00-06-009/R1", bold_font);
             tableHeader.AddCell(cellHeaderContentRight);
@@ -105,7 +105,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             #endregion
 
             document.Add(new Paragraph("Dengan Hormat,", normal_font) { Alignment = Element.ALIGN_LEFT });
-            string firstParagraphString = "Yang bertanda tangan di bawah ini, PT. EFRATA RETAILINDO (selanjutnya disebut sebagai pihak Pembeli) dan " + viewModel.supplier.name + "(selanjutnya disebut sebagai pihak Penjual) saling menyetujui untuk mengadaan kontrak jual beli dengan ketentuan sebagai berikut : ";
+            string firstParagraphString = "Yang bertanda tangan di bawah ini, PT. EFRATA GARMINDO UTAMA (selanjutnya disebut sebagai pihak Pembeli) dan " + viewModel.supplier.name + "(selanjutnya disebut sebagai pihak Penjual) saling menyetujui untuk mengadaan kontrak jual beli dengan ketentuan sebagai berikut : ";
             Paragraph firstParagraph = new Paragraph(firstParagraphString, small_font) { Alignment = Element.ALIGN_LEFT };
             
             firstParagraph.SpacingAfter = 10f;
@@ -274,7 +274,7 @@ namespace Com.DanLiris.Service.Purchasing.Lib.PDFTemplates
             PdfPCell cellSignatureContent = new PdfPCell() { Border = Rectangle.NO_BORDER, HorizontalAlignment = Element.ALIGN_CENTER };
             cellSignatureContent.Phrase = new Phrase("Pembeli\n\n\n\n\n\n\n(  "+ viewModel.CreatedBy + "  )", bold_font);
             tableSignature.AddCell(cellSignatureContent);
-            cellSignatureContent.Phrase = new Phrase("Menyetujui\n\n\n\n\n\n\n(  " + "Adi Nugroho" + "  )", bold_font);
+            cellSignatureContent.Phrase = new Phrase("Menyetujui\n\n\n\n\n\n\n(  " + "Bambang Triadmojo" + "  )", bold_font);
             tableSignature.AddCell(cellSignatureContent);
             //cellSignatureContent.Phrase = new Phrase("Penjual\n\n\n\n\n\n\n(  " + viewModel.supplier.name + "  )", bold_font);
             //tableSignature.AddCell(cellSignatureContent);
